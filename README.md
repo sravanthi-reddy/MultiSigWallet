@@ -77,11 +77,21 @@ MultiSigWallets can be used in a variety of applications, including:
 - Joint bank accounts
 - Decentralized autonomous organizations (DAOs)
 ## Future Scope
-In the future, we plan to add the following features to the MultiSigWallet:
+In the future, we plan to implement off-chain signature storage to reduce gas fees for owners. One potential solution is to use an oracle to store the signatures off-chain while only the verification will be done on-chain. This will allow the owners to save on gas fees while still maintaining the security and integrity of the wallet.
 
-- Move signature generation off-chain to reduce gas fees.
-- Use an oracle to store signatures off-chain.
-- Add support for additional token standards such as ERC-721 and ERC-1155.
+To implement this solution, we will need to:
+
+1. Research and select an oracle solution that is suitable for our needs.
+2. Modify the smart contract to support off-chain signature storage.
+3. Implement the oracle integration in the frontend.
+4. Test and deploy the updated multi-signature wallet with off-chain signature storage.
+
+Some resources to explore for off-chain signature storage using an oracle include:
+
+- [Chainlink](https://chain.link/)
+- [Oraclize](https://docs.oraclize.it/)
+- [API3](https://api3.org/)
+
 ## Contributing
 
 Contributions to the MultiSigWallet are welcome! If you would like to contribute, please follow these steps:
