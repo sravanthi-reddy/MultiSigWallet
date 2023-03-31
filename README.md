@@ -16,25 +16,36 @@ This is a simple implementation of a multisig wallet using [Solidity](https://so
 The purpose of this project is to demonstrate how to create a basic multisig wallet smart contract and interact with it using Web3.js. The multisig wallet allows multiple users to control a single wallet, reducing the risk of a single point of failure or malicious activity.
 
 ## Prerequisites
+### For Users
+To use this multi-signature wallet, you will need:
 
-Before running this project, you must have the following software installed:
+- A compatible web3-enabled browser such as Google Chrome with the MetaMask extension installed.
+- Knowledge of how to use MetaMask to interact with the Ethereum network.
+- Access to the Ethereum network, either through a local node or a public node such as Infura.
+- Ether or other ERC-20 tokens to send and receive.
 
-- [Node.js](https://nodejs.org/)
-- [Ganache](https://www.trufflesuite.com/ganache)
+### For Developers
+To understand and modify the code of this multi-signature wallet, you will need:
 
-## Installation
+- A basic understanding of Solidity programming language and smart contracts.
+- Knowledge of digital signatures and how they work.
+- Node.js installed on your machine.
+- Truffle Suite installed on your machine.
+- Access to a development blockchain network such as Ganache.
+- Git installed on your machine to clone and contribute to the repository.
 
-To install this project, follow these steps:
+### Setting up the Environment
+Once you have installed the prerequisites, follow these steps to set up the development environment:
 
-1. Clone the repository:
+1. Clone this repository to your local machine using `git clone https://github.com/username/multisig-wallet.git`.
+2. Navigate to the project directory using `cd multisig-wallet`.
+3. Install the required dependencies by running `npm install`.
+4. Compile the smart contracts by running `truffle compile`.
+5. Deploy the smart contracts to your local blockchain network by running `truffle migrate`.
+6. Start the development server by running `npm start`.
 
-git clone https://github.com/your-username/multisig-wallet.git
+You should now be able to interact with the multi-signature wallet by visiting http://localhost:3000 in your web browser.
 
-
-2. Install the dependencies:
-
-cd multisig-wallet
-npm install
 
 
 ## Usage
@@ -51,9 +62,23 @@ To use this project, follow these steps:
 
 This will run the test suite and output the results to the console.
 
+## Functionality
+The multisig wallet smart contract allows the following functionality:
+
+Multiple owners can control the funds
+A certain number of owners' signatures are required to approve a transaction
+Owners can propose a transaction, and other owners can approve or reject it
+The wallet balance can be checked
 ## Contributing
 
-If you find a bug or would like to contribute to this project, please open an issue or submit a pull request.
+Contributions to the MultiSigWallet are welcome! If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make your changes and commit them to your branch.
+4. Submit a pull request.
+
+Please make sure to include a detailed description of the changes you have made and any relevant information about the issue you are addressing. We also ask that you follow the code style guidelines and ensure that all tests pass before submitting your changes.
 
 ## License
 
