@@ -45,6 +45,7 @@ Once you have installed the prerequisites, follow these steps to set up the deve
 6. Deploy the smart contracts to your local blockchain network by running `node deploy`.
 7. Interact with the blcokchain using `node interact.js`.
 8. Test the cases using `truffle test`
+9. For linting the code use `npx solhint .\contracts\MultiSigWallet.sol`
 
 
 ## Usage
