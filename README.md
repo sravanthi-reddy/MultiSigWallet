@@ -38,14 +38,13 @@ To understand and modify the code of this multi-signature wallet, you will need:
 Once you have installed the prerequisites, follow these steps to set up the development environment:
 
 1. Clone this repository to your local machine using `git clone  https://github.com/sravanthi-reddy/MultiSigWallet.git`.
-2. Navigate to the project directory using `cd multisig-wallet`.
+2. Navigate to the project directory using `cd MutliSignatureWallet`.
 3. Install the required dependencies by running `npm install`.
-4. Compile the smart contracts by running `truffle compile`.
-5. Deploy the smart contracts to your local blockchain network by running `truffle migrate`.
-6. Start the development server by running `npm start`.
-
-You should now be able to interact with the multi-signature wallet by visiting http://localhost:3000 in your web browser.
-
+4. Take some account address and private keys from Ganache and pass it to the code when deploying or testing the application
+5. Compile the smart contracts by running `truffle compile`.
+6. Deploy the smart contracts to your local blockchain network by running `node deploy`.
+7. Interact with the blcokchain using `node interact.js`.
+8. Test the cases using `truffle test`
 
 
 ## Usage
