@@ -37,7 +37,7 @@ To understand and modify the code of this multi-signature wallet, you will need:
 ### Setting up the Environment
 Once you have installed the prerequisites, follow these steps to set up the development environment:
 
-1. Clone this repository to your local machine using `git clone https://github.com/username/multisig-wallet.git`.
+1. Clone this repository to your local machine using `git clone  https://github.com/sravanthi-reddy/MultiSigWallet.git`.
 2. Navigate to the project directory using `cd multisig-wallet`.
 3. Install the required dependencies by running `npm install`.
 4. Compile the smart contracts by running `truffle compile`.
@@ -52,12 +52,11 @@ You should now be able to interact with the multi-signature wallet by visiting h
 
 To use this project, follow these steps:
 
-1. Start Ganache.
+- Start Ganache.
 
-2. Deploy the multisig wallet contract to the Ganache network:
-
-
-3. Run the test script:
+- Deploy the multisig wallet contract to the Ganache network:
+- Run the interact script using `node interact.js`
+- run `truffle test` to test the whole smart contract 
 
 
 This will run the test suite and output the results to the console.
@@ -65,18 +64,33 @@ This will run the test suite and output the results to the console.
 ## Functionality
 The multisig wallet smart contract allows the following functionality:
 
-Multiple owners can control the funds
-A certain number of owners' signatures are required to approve a transaction
-Owners can propose a transaction, and other owners can approve or reject it
-The wallet balance can be checked
+- Multiple owners can control the funds
+- A certain number of owners' signatures are required to approve a transaction
+- Owners can propose a transaction, and other owners can approve or reject it
+- The wallet balance can be checked
+
+## Applications
+MultiSigWallets can be used in a variety of applications, including:
+
+- Corporate treasury management
+- Crowdfunding platforms
+- Escrow services
+- Joint bank accounts
+- Decentralized autonomous organizations (DAOs)
+## Future Scope
+In the future, we plan to add the following features to the MultiSigWallet:
+
+- Move signature generation off-chain to reduce gas fees.
+- Use an oracle to store signatures off-chain.
+- Add support for additional token standards such as ERC-721 and ERC-1155.
 ## Contributing
 
 Contributions to the MultiSigWallet are welcome! If you would like to contribute, please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Make your changes and commit them to your branch.
-4. Submit a pull request.
+- Fork the repository.
+- Create a new branch for your changes.
+- Make your changes and commit them to your branch.
+- Submit a pull request.
 
 Please make sure to include a detailed description of the changes you have made and any relevant information about the issue you are addressing. We also ask that you follow the code style guidelines and ensure that all tests pass before submitting your changes.
 
