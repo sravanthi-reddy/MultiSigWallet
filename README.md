@@ -1,4 +1,4 @@
-# Multisig Wallet
+# Multi Signature Wallet
 
 This is a simple implementation of a multisig wallet using [Solidity](https://solidity.readthedocs.io/en/v0.8.7/) and [Web3.js](https://web3js.readthedocs.io/en/v1.5.2/).
 
