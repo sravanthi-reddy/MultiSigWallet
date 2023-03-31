@@ -76,21 +76,28 @@ MultiSigWallets can be used in a variety of applications, including:
 - Escrow services
 - Joint bank accounts
 - Decentralized autonomous organizations (DAOs)
+
 ## Future Scope
-In the future, we plan to implement off-chain signature storage to reduce gas fees for owners. One potential solution is to use an oracle to store the signatures off-chain while only the verification will be done on-chain. This will allow the owners to save on gas fees while still maintaining the security and integrity of the wallet.
+Currently, signature generation is performed on-chain, which can be expensive in terms of gas fees. To reduce these costs, we can move signature generation off-chain while still keeping signature verification on-chain. This will require the use of an oracle to store the signatures off-chain.
+This will allow the owners to save on gas fees while still maintaining the security and integrity of the wallet.
 
-To implement this solution, we will need to:
+To implement this feature, we can follow these steps:
 
-1. Research and select an oracle solution that is suitable for our needs.
-2. Modify the smart contract to support off-chain signature storage.
-3. Implement the oracle integration in the frontend.
-4. Test and deploy the updated multi-signature wallet with off-chain signature storage.
+- Modify the existing smart contract to emit an event with the transaction details, such as recipient address, amount, and data, when a transaction is submitted.
 
-Some resources to explore for off-chain signature storage using an oracle include:
+- Set up an oracle to listen to these events and generate the signature off-chain using the private key of the required owner(s).
 
-- [Chainlink](https://chain.link/)
-- [Oraclize](https://docs.oraclize.it/)
-- [API3](https://api3.org/)
+- Once the signature is generated, the oracle can store the signature off-chain, along with the transaction details.
+
+- Modify the existing smart contract to add a new function to accept off-chain signatures from the oracle. This function should verify the signature and execute the     transaction if the required number of signatures have been received.
+
+- Update the user interface to show the status of off-chain signatures and transactions.
+  Some resources to explore for off-chain signature storage using an oracle include:
+
+- [Chainlink](https://chain.link/) -  A decentralized oracle network that can be used to securely connect smart contracts to off-chain data and systems.
+- OpenZeppelin Defender: A platform for managing the security of smart contracts that includes a feature for managing the signing and execution of transactions off-chain
+- [How to Build a Chainlink Oracle on Ethereum](https://trufflesuite.com/tutorials/how-to-build-a-chainlink-oracle-on-ethereum)
+- [Building a Decentralized Oracle with Chainlink](https://medium.com/swlh/building-a-decentralized-oracle-with-chainlink-5b91a5b49737)
 
 ## Contributing
 
