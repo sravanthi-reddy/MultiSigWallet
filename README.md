@@ -58,8 +58,8 @@ Once you have installed the prerequisites, follow these steps to set up the deve
 To use this project, follow these steps:
 
 - Start Ganache.
-
-- Deploy the multisig wallet contract to the Ganache network:
+- `truffle compile`
+- Deploy the multisig wallet contract to the Ganache network using `node deploy.js`
 - Run the interact script using `node interact.js`
 - run `truffle test` to test the whole smart contract
 
@@ -83,6 +83,20 @@ MultiSigWallets can be used in a variety of applications, including:
 - Escrow services
 - Joint bank accounts
 - Decentralized autonomous organizations (DAOs)
+
+## Prevention against Security Attacks
+### Reentrancy Attack 
+As we are using nonce while generating verifying signatures then bad actors can not use the 
+same signature for approving different transaction
+
+### Private accessibility
+Once the approval count is reached then transaction automatically executes and  there is accessibility to executeTransaction methods which may lead to security attacks. To prevent such attacks executeTransaction method is private and called by another method.
+
+## Ways to Optimize Gas Fee
+### Issue with on-chain
+If a Multi signature wallet required approval of 100 owners out of 200 owners then that 100 owners need to initite another transaction only to approve the main transaction which costs a gas fee. If you 100 users paying the gas fee then it is not efficient solution.
+### Off-chain storage
+Using off-chain storage to receive and store those 100 signatures using Oracle and Chainlink. Once we have 100 signatures ready then we can do some computation and send this data to on-chain for signature verification. this way, all owners together are only paying one time trasaction fee to approve and execute the transaction
 
 ## Future Scope
 
