@@ -53,6 +53,17 @@ Once you have installed the prerequisites, follow these steps to set up the deve
 8. Test the cases using `truffle test`
 9. For linting the code use `npx solhint .\contracts\MultiSigWallet.sol`
 
+## Deisgn 
+#### Major things to consider while designing Multi Signature Wallet
+##### Access control: 
+The multisig wallet contract should have clear rules about who can access the wallet and who can approve transactions. Typically, the contract specifies a list of authorized addresses that can approve transactions.
+
+##### Threshold: 
+The contract should specify the number of approvals required for a transaction to be executed. This is usually set to a number that is less than or equal to the total number of authorized addresses.
+
+##### Security: 
+The contract should be designed to prevent unauthorized access and protect against attacks. Common security measures include using secure coding practices, testing the contract extensively before deploying it, and auditing the contract regularly.
+
 ## Usage
 
 To use this project, follow these steps:
