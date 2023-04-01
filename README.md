@@ -118,9 +118,6 @@ Contributions to the MultiSigWallet are welcome! If you would like to contribute
 
 Please make sure to include a detailed description of the changes you have made and any relevant information about the issue you are addressing. We also ask that you follow the code style guidelines and ensure that all tests pass before submitting your changes.
 
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-npm run deploy
+###References
+https://www.coindesk.com/tech/2020/11/10/multisignature-wallets-can-keep-your-coins-safer-if-you-use-them-right/
 
