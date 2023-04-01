@@ -1,1 +1,27 @@
-node_modules
+# Directories
+node_modules/
+build/
+# Files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.pyc
+DS_Store
+
+# Sensitive files
+*.key
+*.pem
+*.p12
+*.pem
+*.cer
+*.crt
+*.jks
+*.keystore
+*.srt
+*.pem
+*.pfx
+*.pem
+*.pem
+*.pem

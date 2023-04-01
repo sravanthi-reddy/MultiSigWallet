@@ -3,14 +3,13 @@ pragma solidity >=0.8.2 <0.9.0;
 
 //multiple owners can sign and approve a single transaction
 contract MultiSigWallet {
-   
     //for uniqueness of each transaction
     //this combined in sign generation prevents reentrancy attack
     uint256 public nonce;
-    
+
     //Number of owners approval required to execute the transaction
     uint256 public required;
-    
+
     //easy to retrive whether a address is owner
     mapping(address => bool) public isOwner;
 
@@ -37,18 +36,26 @@ contract MultiSigWallet {
     event Confirmation(address indexed sender, uint256 indexed transactionId);
     event Execution(uint256 indexed transactionId);
     event Deposit(address indexed sender, uint256 value);
-    event TransactionSubmitted(address indexed to, uint256 value, bytes data, uint256 nonce);
+    event TransactionSubmitted(
+        address indexed to,
+        uint256 value,
+        bytes data,
+        uint256 nonce
+    );
 
     modifier onlyOwner() {
         require(isOwner[msg.sender], "Only owner can access");
         _;
     }
 
-    //to be able to set valid required count while setting up contract 
+    //to be able to set valid required count while setting up contract
     // and stores all the owners of the contract in owners array
     constructor(address[] memory _owners, uint256 _required) {
         require(_owners.length > 0, "Owners required");
-        require(_required > 0 && _required <= _owners.length, "Invalid approval / required count");
+        require(
+            _required > 0 && _required <= _owners.length,
+            "Invalid approval / required count"
+        );
 
         for (uint256 i = 0; i < _owners.length; i++) {
             address owner = _owners[i];
@@ -61,13 +68,13 @@ contract MultiSigWallet {
         required = _required;
     }
 
-    //able to receive payable transactions 
+    //able to receive payable transactions
     function deposit() external payable {
         emit Deposit(msg.sender, msg.value);
     }
 
     //ability to verify the transaction creator - most important step in providing security
-    //generate hash considering nonce so that same signature can't be used for some other 
+    //generate hash considering nonce so that same signature can't be used for some other
     //transaction. prevents reentrancy attack
     //The signature must be valid and signed by one of the wallet owners.
     /**
@@ -81,8 +88,12 @@ contract MultiSigWallet {
     Records the confirmation of the transaction by the signer.
     Emits an event for the submitted transaction and the confirmation by the signer.
     */
-    function submitTransaction(address _to, uint256 _value, bytes memory _data, bytes memory _signature) external  onlyOwner  {
-        
+    function submitTransaction(
+        address _to,
+        uint256 _value,
+        bytes memory _data,
+        bytes memory _signature
+    ) external onlyOwner {
         require(_to != address(0), "Invalid recipient address");
         bytes32 messageHash = getMessageHash(_to, _value, _data, nonce);
         address signer = recoverSigner(messageHash, _signature);
@@ -120,29 +131,36 @@ contract MultiSigWallet {
         Transaction storage transaction = transactions[_id];
 
         require(!transaction.executed, "Transaction already executed");
-        require(!transaction.confirmations[msg.sender], "Transaction already confirmed by owner");
+        require(
+            !transaction.confirmations[msg.sender],
+            "Transaction already confirmed by owner"
+        );
 
         transaction.confirmations[msg.sender] = true;
 
         emit Confirmation(msg.sender, _id);
-        
+
         if (isConfirmed(_id)) {
             executeTransaction(_id);
         }
     }
 
-    //executes the transaction and does relevent ether and data transfer to the recepient address 
+    //executes the transaction and does relevent ether and data transfer to the recepient address
     //prevents double execution and validates approval count before executing
-    function executeTransaction(uint256 _id) private onlyOwner { 
-
+    function executeTransaction(uint256 _id) private onlyOwner {
         Transaction storage transaction = transactions[_id];
 
-        require(isConfirmed(_id), "Transaction not confirmed by required number of owners");
+        require(
+            isConfirmed(_id),
+            "Transaction not confirmed by required number of owners"
+        );
         require(!transaction.executed, "Transaction already executed");
 
         transaction.executed = true;
 
-        (bool success, ) = transaction.to.call{value: transaction.value}(transaction.data);
+        (bool success, ) = transaction.to.call{value: transaction.value}(
+            transaction.data
+        );
         require(success, "Transaction execution failed");
 
         emit Execution(_id);
@@ -162,35 +180,35 @@ contract MultiSigWallet {
         }
         return false;
     }
+
     //generates the message hash based on transaction data to verify the signature of the above
-    //includes nonce to prevent reentrancy attack. It uses special string while generating hash to seperate regular 
+    //includes nonce to prevent reentrancy attack. It uses special string while generating hash to seperate regular
     //message signature from important value singatures
-    function getMessageHash(address _to, uint256 _value, bytes memory _data, uint256 _nonce) public view returns (bytes32) {
+    function getMessageHash(
+        address _to,
+        uint256 _value,
+        bytes memory _data,
+        uint256 _nonce
+    ) public view returns (bytes32) {
         bytes32 messageHash = keccak256(
             abi.encodePacked(
                 "\x19Ethereum Signed Message:\n32",
-                keccak256(
-                    abi.encode(
-                        address(this),
-                        _to,
-                        _value,
-                        _data,
-                        _nonce
-                    )
-                )
+                keccak256(abi.encode(address(this), _to, _value, _data, _nonce))
             )
         );
         return messageHash;
     }
 
     /**
-    * @dev Recovers the signer of a message given its hash and signature parameters.
-    * @param _messageHash The hash of the signed message.
-    * @param _signature The signature parameters in the format of [r, s, v].
-    * @return The address of the signer recovered from the signature, or address(0) if the signature is invalid.
-    */
-    function recoverSigner(bytes32 _messageHash, bytes memory _signature) public pure returns (address)
-    {
+     * @dev Recovers the signer of a message given its hash and signature parameters.
+     * @param _messageHash The hash of the signed message.
+     * @param _signature The signature parameters in the format of [r, s, v].
+     * @return The address of the signer recovered from the signature, or address(0) if the signature is invalid.
+     */
+    function recoverSigner(
+        bytes32 _messageHash,
+        bytes memory _signature
+    ) public pure returns (address) {
         bytes32 r;
         bytes32 s;
         uint8 v;
@@ -210,9 +228,10 @@ contract MultiSigWallet {
         // EIP-2 still allows signature malleability for ecrecover(). Remove this possibility and make the signature
         // unique. Appendix F in the Ethereum Yellow paper (https://ethereum.github.io/yellowpaper/paper.pdf),
         // defines the signed message hash as the message that is hashed with the prefix
-        bytes32 prefixedHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", _messageHash));
+        bytes32 prefixedHash = keccak256(
+            abi.encodePacked("\x19Ethereum Signed Message:\n32", _messageHash)
+        );
 
         return ecrecover(prefixedHash, v, r, s);
     }
-
 }

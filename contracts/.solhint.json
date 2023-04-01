@@ -1,0 +1,11 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "avoid-throw": "error",
+    "no-empty-blocks": "error",
+    "func-visibility": ["error", { "ignoreConstructors": true }]
+  },
+  "plugins": [
+    "security"
+  ]
+}

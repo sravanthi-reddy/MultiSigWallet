@@ -16,7 +16,9 @@ This is a simple implementation of a multisig wallet using [Solidity](https://so
 The purpose of this project is to demonstrate how to create a basic multisig wallet smart contract and interact with it using Web3.js. The multisig wallet allows multiple users to control a single wallet, reducing the risk of a single point of failure or malicious activity.
 
 ## Prerequisites
+
 ### For Users
+
 To use this multi-signature wallet, you will need:
 
 - A compatible web3-enabled browser such as Google Chrome with the MetaMask extension installed.
@@ -25,6 +27,7 @@ To use this multi-signature wallet, you will need:
 - Ether or other ERC-20 tokens to send and receive.
 
 ### For Developers
+
 To understand and modify the code of this multi-signature wallet, you will need:
 
 - A basic understanding of Solidity programming language and smart contracts.
@@ -35,6 +38,7 @@ To understand and modify the code of this multi-signature wallet, you will need:
 - Git installed on your machine to clone and contribute to the repository.
 
 ### Setting up the Environment
+
 Once you have installed the prerequisites, follow these steps to set up the development environment:
 
 1. Clone this repository to your local machine using `git clone  https://github.com/sravanthi-reddy/MultiSigWallet.git`.
@@ -47,7 +51,6 @@ Once you have installed the prerequisites, follow these steps to set up the deve
 8. Test the cases using `truffle test`
 9. For linting the code use `npx solhint .\contracts\MultiSigWallet.sol`
 
-
 ## Usage
 
 To use this project, follow these steps:
@@ -56,12 +59,12 @@ To use this project, follow these steps:
 
 - Deploy the multisig wallet contract to the Ganache network:
 - Run the interact script using `node interact.js`
-- run `truffle test` to test the whole smart contract 
-
+- run `truffle test` to test the whole smart contract
 
 This will run the test suite and output the results to the console.
 
 ## Functionality
+
 The multisig wallet smart contract allows the following functionality:
 
 - Multiple owners can control the funds
@@ -70,6 +73,7 @@ The multisig wallet smart contract allows the following functionality:
 - The wallet balance can be checked
 
 ## Applications
+
 MultiSigWallets can be used in a variety of applications, including:
 
 - Corporate treasury management
@@ -79,6 +83,7 @@ MultiSigWallets can be used in a variety of applications, including:
 - Decentralized autonomous organizations (DAOs)
 
 ## Future Scope
+
 Currently, signature generation is performed on-chain, which can be expensive in terms of gas fees. To reduce these costs, we can move signature generation off-chain while still keeping signature verification on-chain. This will require the use of an oracle to store the signatures off-chain.
 This will allow the owners to save on gas fees while still maintaining the security and integrity of the wallet.
 
@@ -90,12 +95,12 @@ To implement this feature, we can follow these steps:
 
 - Once the signature is generated, the oracle can store the signature off-chain, along with the transaction details.
 
-- Modify the existing smart contract to add a new function to accept off-chain signatures from the oracle. This function should verify the signature and execute the     transaction if the required number of signatures have been received.
+- Modify the existing smart contract to add a new function to accept off-chain signatures from the oracle. This function should verify the signature and execute the transaction if the required number of signatures have been received.
 
 - Update the user interface to show the status of off-chain signatures and transactions.
   Some resources to explore for off-chain signature storage using an oracle include:
 
-- [Chainlink](https://chain.link/) -  A decentralized oracle network that can be used to securely connect smart contracts to off-chain data and systems.
+- [Chainlink](https://chain.link/) - A decentralized oracle network that can be used to securely connect smart contracts to off-chain data and systems.
 - OpenZeppelin Defender: A platform for managing the security of smart contracts that includes a feature for managing the signing and execution of transactions off-chain
 - [How to Build a Chainlink Oracle on Ethereum](https://trufflesuite.com/tutorials/how-to-build-a-chainlink-oracle-on-ethereum)
 - [Building a Decentralized Oracle with Chainlink](https://medium.com/swlh/building-a-decentralized-oracle-with-chainlink-5b91a5b49737)
@@ -116,4 +121,3 @@ Please make sure to include a detailed description of the changes you have made 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 npm run deploy
-
