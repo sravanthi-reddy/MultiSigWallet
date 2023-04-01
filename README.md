@@ -11,12 +11,13 @@ This is a simple implementation of a multisig wallet using [Solidity](https://so
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Purpose
 
 The purpose of this project is to demonstrate how to create a basic multisig wallet smart contract and interact with it using Web3.js. The multisig wallet allows multiple users to control a single wallet, reducing the risk of a single point of failure or malicious activity.
 
+- [Github Repo](https://github.com/sravanthi-reddy/MultiSigWallet)
 ## Prerequisites
 
 ### For Users
