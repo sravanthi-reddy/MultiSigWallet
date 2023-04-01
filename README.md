@@ -2,6 +2,8 @@
 
 This is a simple implementation of a multisig wallet using [Solidity](https://solidity.readthedocs.io/en/v0.8.7/) and [Web3.js](https://web3js.readthedocs.io/en/v1.5.2/).
 
+![Alt text](./images/MultiSig.jpg?raw=true)
+
 ## Table of Contents
 
 - [Purpose](#purpose)
@@ -121,3 +123,4 @@ Please make sure to include a detailed description of the changes you have made 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 npm run deploy
+
