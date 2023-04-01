@@ -1,0 +1,16 @@
+{
+  "extends": "solhint:recommended",
+  "rules": {
+    "indent": ["error", 2],
+    "quotes": ["error", "double"]
+  },
+  "overrides": [
+    {
+      "files": "*.sol",
+      "parser": "solidity",
+      "rules": {
+        "compiler-version": ["error", "^0.8.2"]
+      }
+    }
+  ]
+}

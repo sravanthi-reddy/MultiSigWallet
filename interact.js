@@ -8,19 +8,21 @@ const contractJson = require("./build/contracts/MultiSigWallet.json");
 const contractABI = contractJson.abi;
 //const bytecode = contractJson.bytecode;
 
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:7545'));
+const web3 = new Web3(new Web3.providers.HttpProvider(process.env.GANACHE_URL));
+
+//assign some owner account and corresponding private keys from ganache
+
 
 // Get contract instance and deployed address
 const contractAddress = '0x652E9F4629605ad265aeb394E1E7F7CbD425E12D'; // Replace with actual deployed contract address
 const contractInstance = new web3.eth.Contract(contractABI, contractAddress);
 
 // Set up accounts to use for testing
-const accounts = ['0xFC4E737651e9Ff45b09b3415ad2e9B2489b4eff5', '0x34c6823600ae6Ea44d6f07050b2b055E38fD7B80']; // Replace with actual account addresses
+const accounts = ['0xFC4E737651e9Ff45b09b3415ad2e9B2489b4eff5', '0x34c6823600ae6Ea44d6f07050b2b055E38fD7B80']; 
 
-const owner_account = ["0xa93a9357D8aA7F32a9118aa04f3D47f178C2dAa9","0x39f894B642C7649D3750C7A031A5Ee0D4c16779C"]
-const private_keys = ['24c53e02c6738d9175c2b55472a03e85a4459ecb39774eb04c18b903a0515c31',
-'9f09104efc12d3019d634a3964a7f345f511f5b5285335707594a141549138d6'
-] 
+const owner_account = [process.env.owner1_address,process.env.owner2_address]
+const private_keys = [process.env.owner1_pk, process.env.owner2_pk] 
+
 // Test the deposit function
 const deposit = async () => {
   const sender = accounts[0];
@@ -49,7 +51,6 @@ const getTransactions = async (transactionIndex) => {
   .catch(error => {
     console.error('Error:', error);
   });
-  //console.log('Submit transaction receipt:', receipt);
 };
 
 // Test the confirmTransaction function
@@ -89,7 +90,7 @@ async function interactIsConfirmed(transactionId) {
   }
 }
 
-// Test all functions
+// Test all functions one by one
 (async () => {
   await submitTransaction();
  // await getTransactions(2);

@@ -1,5 +1,4 @@
 const MultiSigWallet = artifacts.require("MultiSigWallet");
-const multiSigWalletJson = require('../build/contracts/MultiSigWallet.json');
 
 const { expect } = require("chai");
 
