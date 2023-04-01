@@ -53,13 +53,24 @@ Once you have installed the prerequisites, follow these steps to set up the deve
 8. Test the cases using `truffle test`
 9. For linting the code use `npx solhint .\contracts\MultiSigWallet.sol`
 
+## Deisgn 
+#### Major things to consider while designing Multi Signature Wallet
+##### Access control: 
+The multisig wallet contract should have clear rules about who can access the wallet and who can approve transactions. Typically, the contract specifies a list of authorized addresses that can approve transactions.
+
+##### Threshold: 
+The contract should specify the number of approvals required for a transaction to be executed. This is usually set to a number that is less than or equal to the total number of authorized addresses.
+
+##### Security: 
+The contract should be designed to prevent unauthorized access and protect against attacks. Common security measures include using secure coding practices, testing the contract extensively before deploying it, and auditing the contract regularly.
+
 ## Usage
 
 To use this project, follow these steps:
 
 - Start Ganache.
-
-- Deploy the multisig wallet contract to the Ganache network:
+- `truffle compile`
+- Deploy the multisig wallet contract to the Ganache network using `node deploy.js`
 - Run the interact script using `node interact.js`
 - run `truffle test` to test the whole smart contract
 
@@ -74,6 +85,20 @@ The multisig wallet smart contract allows the following functionality:
 - Owners can propose a transaction, and other owners can approve or reject it
 - The wallet balance can be checked
 
+## Prevention against Security Attacks
+#### Reentrancy Attack 
+As we are using nonce while generating verifying signatures then bad actors can not use the 
+same signature for approving different transaction
+
+#### Private accessibility
+Once the approval count is reached then transaction automatically executes and  there is accessibility to executeTransaction methods which may lead to security attacks. To prevent such attacks executeTransaction method is private and called by another method.
+
+## Ways to Optimize Gas Fee
+#### Issue with on-chain
+If a Multi signature wallet required approval of 100 owners out of 200 owners then that 100 owners need to initite another transaction only to approve the main transaction which costs a gas fee. If you 100 users paying the gas fee then it is not efficient solution.
+#### Off-chain storage
+Using off-chain storage to receive and store those 100 signatures using Oracle and Chainlink. Once we have 100 signatures ready then we can do some computation and send this data to on-chain for signature verification. this way, all owners together are only paying one time trasaction fee to approve and execute the transaction
+
 ## Applications
 
 MultiSigWallets can be used in a variety of applications, including:
@@ -83,6 +108,7 @@ MultiSigWallets can be used in a variety of applications, including:
 - Escrow services
 - Joint bank accounts
 - Decentralized autonomous organizations (DAOs)
+
 
 ## Future Scope
 
@@ -118,9 +144,6 @@ Contributions to the MultiSigWallet are welcome! If you would like to contribute
 
 Please make sure to include a detailed description of the changes you have made and any relevant information about the issue you are addressing. We also ask that you follow the code style guidelines and ensure that all tests pass before submitting your changes.
 
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-npm run deploy
+### References
+https://www.coindesk.com/tech/2020/11/10/multisignature-wallets-can-keep-your-coins-safer-if-you-use-them-right/
 
